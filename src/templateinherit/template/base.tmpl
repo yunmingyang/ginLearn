@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>hello</title>
+        <style>
+            * {
+                margin: 0;
+            }
+
+            .nav {
+                height: 50px;
+                width: 100%;
+                position: fixed;
+                top: 0;
+                background-color: burlywood;
+            }
+
+            .main {
+                margin-top: 50px;
+            }
+
+            .menu {
+                width: 20%;
+                position: fixed;
+                left: 0;
+                height: 100%;
+                background-color: cornflowerblue;
+            }
+
+            .center {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="nav"></div>
+        <div class="main">
+            <div class="menu"></div>
+            <div class="center">
+                {{ block "content" . }}{{end}}
+            </div>
+        </div>
+    </body>
+</html>
