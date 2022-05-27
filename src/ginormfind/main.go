@@ -18,7 +18,7 @@ type User struct {
 }
 
 func main() {
-	db, err := gorm.Open("mysql", "root:1qaz9ol.@(127.0.0.1:3306)/test?charset=utf8mb4&parseTime=true&loc=Local")
+	db, err := gorm.Open("mysql", "root:1qaz9ol.@(127.0.0.1:3306)/todo?charset=utf8mb4&parseTime=true&loc=Local")
 	if err != nil {
 		log.Fatalf("Connect failed: %v", err)
 	}
@@ -28,14 +28,13 @@ func main() {
 		db.AutoMigrate(&User{})
 	}
 
-	// // Create two test data
+	// Create two test data
 	// u1 := User{Name: sql.NullString{String: "", Valid: true}, Age: sql.NullInt64{Int64: 10, Valid: true}}
 	// db.Debug().Create(&u1)
 
 	// u2 := User{Name: sql.NullString{String: "rrrrr", Valid: true}, Age: sql.NullInt64{Int64: 0, Valid: true}}
 	// db.Debug().Create(&u2)
 
-	// var user User
 	u1 := new(User)
 	// The first record, primary key should be a number
 	db.First(&u1)
@@ -66,4 +65,9 @@ func main() {
 	var u6 User
 	db.Debug().FirstOrCreate(&u6, User{Name: sql.NullString{String: "u6", Valid: true}})
 	fmt.Printf("FirstOrCreate: %v\n", u6)
+
+	// // an error raised, which is "unsupported destination, should be slice or struct"
+	// var u *User
+	// db.Debug().Where("id = ?", 1).Find(u)
+	// fmt.Printf("%v\n", u)
 }
